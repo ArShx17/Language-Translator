@@ -246,15 +246,10 @@ body {
 }
 
 .footer-text {
-  font-size: 0.78rem;
-  font-weight: 400;
-  color: var(--clr-text-dim);
-}
-
-.footer-amp {
-  font-size: 0.72rem;
-  color: rgba(255,255,255,0.15);
-  font-weight: 300;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--clr-text-muted);
+  letter-spacing: 0.01em;
 }
 
 .heart {
@@ -270,22 +265,28 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 30px;
-  height: 30px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.1);
-  color: var(--clr-text-muted);
+  background: transparent;
+  border: none;
+  color: #ffffff;
   text-decoration: none;
   transition: all var(--duration) var(--ease);
 }
 
+.creator-avatar svg {
+  fill: #ffffff;
+}
+
 .creator-avatar:hover {
-  background: rgba(52,211,153,0.12);
-  border-color: rgba(52,211,153,0.3);
   color: var(--clr-accent);
-  transform: scale(1.15);
-  box-shadow: 0 0 16px rgba(52,211,153,0.15);
+  transform: scale(1.2);
+  filter: drop-shadow(0 0 8px rgba(52,211,153,0.4));
+}
+
+.creator-avatar:hover svg {
+  fill: var(--clr-accent);
 }
 
 /* ═══ ANIMATIONS ═══ */
