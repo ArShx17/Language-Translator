@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Language Translator — Translate text instantly between 100+ languages with voice input, auto-detection, and a beautiful modern interface." />
+  <meta name="author" content="Abhay (ArShx17)" />
+  <title>Language Translator | Instant Multi-Language Translation</title>
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌐</text></svg>" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ═══════════════ BACKGROUND ═══════════════ -->
+  <div class="bg-layer" aria-hidden="true">
+    <div class="bg-image"></div>
+    <div class="bg-gradient"></div>
+    <div class="bg-orbs">
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+      <div class="orb orb-3"></div>
+    </div>
+    <div class="bg-particles" id="particles"></div>
+  </div>
+
+  <!-- ═══════════════ HEADER ═══════════════ -->
+  <header id="app-header">
+    <div class="header-inner">
+      <div class="logo-mark" aria-hidden="true">
+        <svg width="44" height="44" viewBox="0 0 44 44" fill="none">
+          <circle cx="22" cy="22" r="20" stroke="url(#logoGrad)" stroke-width="2" opacity="0.6"/>
+          <circle cx="22" cy="22" r="14" stroke="url(#logoGrad)" stroke-width="1.5" opacity="0.3"/>
+          <path d="M12 17h10M17 12v10M24 32l4-10 4 10M25.5 29h5" stroke="url(#logoGrad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <defs><linearGradient id="logoGrad" x1="0" y1="0" x2="44" y2="44"><stop stop-color="#34d399"/><stop offset="0.5" stop-color="#06b6d4"/><stop offset="1" stop-color="#8b5cf6"/></linearGradient></defs>
+        </svg>
+      </div>
+      <h1 class="app-title">Language Translator</h1>
+      <p class="app-subtitle">Translate text & voice instantly between languages</p>
+    </div>
+  </header>
+
+  <!-- ═══════════════ MAIN ═══════════════ -->
+  <main id="app-main">
+
+    <!-- Language Selector Bar -->
+    <div class="lang-bar glass-card" id="lang-bar">
+      <div class="lang-select-group">
+        <label for="src-lang" class="lang-label">From</label>
+        <div class="select-wrapper">
+          <select id="src-lang" class="lang-select">
+            <option value="auto" selected>🌐  Auto Detect</option>
+            <option value="en">🇬🇧  English</option>
+            <option value="hi">🇮🇳  Hindi</option>
+            <option value="fr">🇫🇷  French</option>
+            <option value="de">🇩🇪  German</option>
+            <option value="es">🇪🇸  Spanish</option>
+            <option value="it">🇮🇹  Italian</option>
+            <option value="ja">🇯🇵  Japanese</option>
+            <option value="ko">🇰🇷  Korean</option>
+            <option value="zh-CN">🇨🇳  Chinese</option>
+            <option value="ar">🇸🇦  Arabic</option>
+            <option value="pt">🇵🇹  Portuguese</option>
+            <option value="ru">🇷🇺  Russian</option>
+            <option value="bn">🇧🇩  Bengali</option>
+            <option value="ta">🇮🇳  Tamil</option>
+            <option value="te">🇮🇳  Telugu</option>
+            <option value="ur">🇵🇰  Urdu</option>
+            <option value="tr">🇹🇷  Turkish</option>
+            <option value="vi">🇻🇳  Vietnamese</option>
+            <option value="th">🇹🇭  Thai</option>
+            <option value="nl">🇳🇱  Dutch</option>
+            <option value="pl">🇵🇱  Polish</option>
+            <option value="sv">🇸🇪  Swedish</option>
+            <option value="uk">🇺🇦  Ukrainian</option>
+          </select>
+          <span class="select-arrow" aria-hidden="true">▾</span>
+        </div>
+        <!-- Auto-detected language badge -->
+        <span class="detected-badge" id="detected-badge" style="display:none;">
+          <span class="detected-dot"></span>
+          <span id="detected-lang-name">English detected</span>
+        </span>
+      </div>
+
+      <!-- Swap Button -->
+      <button class="swap-btn" id="swap-btn" title="Swap languages (Ctrl+S)" aria-label="Swap source and target languages">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M7 16l-4-4 4-4"/>
+          <path d="M17 8l4 4-4 4"/>
+          <line x1="3" y1="12" x2="21" y2="12"/>
+        </svg>
+      </button>
+
+      <div class="lang-select-group">
+        <label for="dest-lang" class="lang-label">To</label>
+        <div class="select-wrapper">
+          <select id="dest-lang" class="lang-select">
+            <option value="hi" selected>🇮🇳  Hindi</option>
+            <option value="en">🇬🇧  English</option>
+            <option value="fr">🇫🇷  French</option>
+            <option value="de">🇩🇪  German</option>
+            <option value="es">🇪🇸  Spanish</option>
+            <option value="it">🇮🇹  Italian</option>
+            <option value="ja">🇯🇵  Japanese</option>
+            <option value="ko">🇰🇷  Korean</option>
+            <option value="zh-CN">🇨🇳  Chinese</option>
+            <option value="ar">🇸🇦  Arabic</option>
+            <option value="pt">🇵🇹  Portuguese</option>
+            <option value="ru">🇷🇺  Russian</option>
+            <option value="bn">🇧🇩  Bengali</option>
+            <option value="ta">🇮🇳  Tamil</option>
+            <option value="te">🇮🇳  Telugu</option>
+            <option value="ur">🇵🇰  Urdu</option>
+            <option value="tr">🇹🇷  Turkish</option>
+            <option value="vi">🇻🇳  Vietnamese</option>
+            <option value="th">🇹🇭  Thai</option>
+            <option value="nl">🇳🇱  Dutch</option>
+            <option value="pl">🇵🇱  Polish</option>
+            <option value="sv">🇸🇪  Swedish</option>
+            <option value="uk">🇺🇦  Ukrainian</option>
+          </select>
+          <span class="select-arrow" aria-hidden="true">▾</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Translation Card -->
+    <div class="translator-card glass-card" id="translator-card">
+      <div class="panels">
+
+        <!-- ──── Input Panel ──── -->
+        <div class="panel panel-input">
+          <div class="panel-header">
+            <span class="panel-title">Source Text</span>
+            <span class="char-count" id="input-char-count">0 / 5,000</span>
+          </div>
+          <textarea
+            id="input-text"
+            class="text-area"
+            placeholder="Enter text or use voice input..."
+            maxlength="5000"
+            spellcheck="true"
+          ></textarea>
+          <div class="panel-footer">
+            <!-- Voice Input Button -->
+            <button class="icon-btn voice-btn" id="voice-input-btn" title="Voice input (hold to speak)" aria-label="Start voice input">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z"/>
+                <path d="M19 10v2a7 7 0 01-14 0v-2"/>
+                <line x1="12" y1="19" x2="12" y2="23"/>
+                <line x1="8" y1="23" x2="16" y2="23"/>
+              </svg>
+              <span class="voice-label">Speak</span>
+            </button>
+            <!-- Speak Source Text -->
+            <button class="icon-btn" id="speak-input-btn" title="Listen to source text" aria-label="Listen to source text">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+                <path d="M19.07 4.93a10 10 0 010 14.14"/>
+                <path d="M15.54 8.46a5 5 0 010 7.07"/>
+              </svg>
+            </button>
+            <div class="footer-spacer"></div>
+            <!-- Clear Input -->
+            <button class="icon-btn" id="clear-input-btn" title="Clear input" aria-label="Clear input text">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- ──── Divider ──── -->
+        <div class="panel-divider" aria-hidden="true">
+          <div class="divider-line"></div>
+        </div>
+
+        <!-- ──── Output Panel ──── -->
+        <div class="panel panel-output">
+          <div class="panel-header">
+            <span class="panel-title">Translation</span>
+            <span class="char-count" id="output-char-count">0</span>
+          </div>
+          <textarea
+            id="output-text"
+            class="text-area"
+            placeholder="Translation will appear here..."
+            readonly
+          ></textarea>
+          <div class="panel-footer">
+            <!-- Speak Output -->
+            <button class="icon-btn" id="speak-output-btn" title="Listen to translation" aria-label="Listen to translated text">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+                <path d="M19.07 4.93a10 10 0 010 14.14"/>
+                <path d="M15.54 8.46a5 5 0 010 7.07"/>
+              </svg>
+            </button>
+            <div class="footer-spacer"></div>
+            <!-- Copy -->
+            <button class="icon-btn" id="copy-btn" title="Copy translation" aria-label="Copy translated text">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+              <span class="copy-label">Copy</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Voice Recording Indicator (overlay) -->
+      <div class="voice-overlay" id="voice-overlay">
+        <div class="voice-ripple">
+          <div class="ripple-ring ripple-1"></div>
+          <div class="ripple-ring ripple-2"></div>
+          <div class="ripple-ring ripple-3"></div>
+          <div class="voice-mic-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z"/>
+              <path d="M19 10v2a7 7 0 01-14 0v-2"/>
+              <line x1="12" y1="19" x2="12" y2="23"/>
+              <line x1="8" y1="23" x2="16" y2="23"/>
+            </svg>
+          </div>
+        </div>
+        <p class="voice-status" id="voice-status">Listening...</p>
+        <button class="voice-stop-btn" id="voice-stop-btn">Stop</button>
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="action-bar" id="action-bar">
+      <button class="btn btn-translate" id="translate-btn">
+        <span class="btn-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8l4 4-4 4"/><line x1="12" y1="16" x2="19" y2="16"/></svg>
+        </span>
+        <span class="btn-text">Translate</span>
+        <span class="btn-loader" id="translate-loader" aria-hidden="true">
+          <span class="spinner"></span>
+        </span>
+      </button>
+      <button class="btn btn-clear" id="clear-btn">
+        <span class="btn-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a1 1 0 011-1h4a1 1 0 011 1v2"/></svg>
+        </span>
+        <span class="btn-text">Clear All</span>
+      </button>
+    </div>
+
+    <!-- Keyboard Shortcuts Hint -->
+    <div class="shortcuts-hint" id="shortcuts-hint">
+      <span class="shortcut-item"><kbd>Ctrl</kbd> + <kbd>Enter</kbd> Translate</span>
+      <span class="shortcut-sep">•</span>
+      <span class="shortcut-item"><kbd>Ctrl</kbd> + <kbd>S</kbd> Swap</span>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast" aria-live="polite">
+      <span class="toast-icon" id="toast-icon">✓</span>
+      <span class="toast-msg" id="toast-msg">Copied to clipboard!</span>
+    </div>
+
+  </main>
+
+  <!-- ═══════════════ FOOTER ═══════════════ -->
+  <footer id="app-footer">
+    <div class="footer-inner">
+      <p class="footer-credit">
+        Crafted with <span class="heart">♥</span> by
+        <a href="https://github.com/ArShx17" target="_blank" rel="noopener noreferrer" class="footer-link" id="github-link">
+          <svg class="github-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          <strong>Abhay (ArShx17)</strong>
+        </a>
+      </p>
+      <p class="footer-tech">Built with HTML, CSS & Vanilla JS</p>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="js/app.js"></script>
+</body>
+</html>
